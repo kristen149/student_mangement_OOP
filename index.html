@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Student Management</title>
+	<!-- GOOGLE FONT -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+
+	<!-- FONT AWESOME -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+		integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<!-- BOOTSTRAP V5.3 -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+	<!-- MAIN CSS -->
+	<link rel="stylesheet" href="./public/css/style.css">
+</head>
+
+<body>
+	<div class="logo"></div>
+	<div class="container" id="form__student">
+		<h2 class="text-center py-3 text-danger">Welcome to student information management</h2>
+		<div class="instruction bg-dark-subtle text-center">
+		
+
+				
+					<h4 class="text-dark p-4"> User guide: First click button
+
+						<button class="btn btn-primary">Get storage</button>
+
+
+						to load former data
+
+					</h4>
+				
+			
+				
+					<h4 class="text-dark"></h4>
+				
+					<h4 class="text-dark p-4"> Remember to click 
+
+						<button class="btn btn-success">Save storage</button>
+						to save your added data
+
+					</h4>
+				
+			
+				
+					<h4 class="text-dark"></h4>
+
+				
+			
+
+
+
+
+
+		</div>
+
+		<form>
+			<div class="form-group">
+				<label for="studentID">Student ID:</label>
+				<input type="text" class="form-control" id="studentID" placeholder="Enter student ID..."
+					name="Student ID">
+				<p id="error_studentID_blank_space" class="text-danger mb-0"></p>
+				<p id="error_studentID_all_number" class="text-danger"></p>
+			</div>
+			<div class="form-group">
+				<label for="fullname">Fullname:</label>
+				<input type="text" class="form-control" id="fullname" placeholder="Enter fullname..." name="Fullname">
+				<p id="error_fullname_blank_space" class="text-danger"></p>
+
+			</div>
+			<div class="form-group">
+				<label for="nationality">Nationality:</label>
+				<input type="text" class="form-control" id="nationality" placeholder="Enter nationality..."
+					name="Nationality">
+				<p id="error_nationality_all_character" class="text-danger"></p>
+
+			</div>
+			<div class="form-group">
+				<label for="phoneNumber">Phone number:</label>
+				<input type="text" class="form-control" id="phoneNumber" placeholder="Enter phone number..."
+					name="Phone number">
+				<p id="error_phonenumber_all_number" class="text-danger"></p>
+
+			</div>
+
+			<div class="form-group">
+				<label for="email">Email:</label>
+				<input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+				<p id="error_email" class="text-danger"></p>
+
+			</div>
+			<div class="form-group">
+				<label for="algebra">Algebra:</label>
+				<input type="number" class="form-control" id="algebra" placeholder="Enter algebra score" name="Algebra">
+				<p id="error_algebra_all_number" class="text-danger"></p>
+
+			</div>
+			<div class="form-group">
+				<label for="physics">Physics:</label>
+				<input type="number" class="form-control" id="physics" placeholder="Enter physics score" name="Physics">
+				<p id="error_physics_all_number" class="text-danger"></p>
+
+			</div>
+			<div class="form-group">
+				<label for="chemistry">Chemistry:</label>
+				<input type="number" class="form-control" id="chemistry" placeholder="Enter chemistry score"
+					name="Chemistry">
+				<p id="error_chemistry_all_number" class="text-danger"></p>
+
+			</div>
+			<button type="button" class="btn btn-success mt-3 me-2" onclick="AddStudent()"><i class="fa fa-plus"></i>
+				ADD STUDENT</button>
+			<button type="button" class="btn btn-primary mt-3" onclick="SaveInfo()"><i class="fa fa-save"></i> EDIT AND
+				SAVE</button>
+
+		</form>
+
+		<span id="submited_successfully" class="text-danger fs-3"></span>
+
+		<div style="float: right;">
+			<button class="btn btn-success" onclick="SaveStorage()">Save storage</button>
+			<button class="btn btn-primary" onclick="GetStorage()">Get storage</button>
+			<button class="btn btn-danger" onclick="DeleteStudent()">Delete student</button>
+		</div>
+	</div>
+	<!--table bootstrap 4 -->
+	<div class="clearfix"></div>
+	<br>
+
+	<div class="container">
+		<div class="right">
+			<div class="input-group">
+				<input type="text" id="keyword" onkeyup="SearchStudent()" onchange="SearchStudent()"
+					class="form-control " placeholder="Enter fullname ...">
+				<span class="input-group-btn">
+					<button class="btn btn-warning" onclick="SearchStudent()" type="button">Search</button>
+				</span>
+			</div>
+			<br />
+			<div class="alert alert-success" id="notification"></div>
+		</div>
+		<h2>Student List</h2>
+		<p> </p>
+		<table id="TableStudent" class="table">
+			<thead>
+				<tr>
+					<th>Delete</th>
+					<th>StudentID </th>
+					<th>Fullname</th>
+					<th>Nationality</th>
+					<th>Phone number</th>
+					<th>Email</th>
+					<th>Average score</th>
+					<th>Performance</th>
+				</tr>
+			</thead>
+			<tbody id="tbodyStudent">
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- BOOTSTRAP V5.3 SCRIPT -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+		crossorigin="anonymous"></script>
+
+	<script src="./public/js/Validation.js"></script>
+	<script src="./public/js/Student.js"></script>
+	<script src="./public/js/ListStudent.js"></script>
+	<script src="./public/js/main.js"></script>
+
+
+</body>
+
+</html>

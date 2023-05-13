@@ -1,0 +1,18 @@
+.trStudent:hover{
+    background-color:coral;
+    cursor: pointer;
+}
+
+#form__student input {
+    border-color: grey;
+}
+#tbodyStudent td, #TableStudent th {
+    text-align: center;
+}
+
+#tbodyStudent .ckboxDelete {
+    display: inline-block;
+    text-align: center;
+    width:20px;
+    height:20px;
+}
